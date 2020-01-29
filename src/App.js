@@ -1,25 +1,36 @@
-import React from 'react';
+import React,{ useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
+import {BrowserRouter as Router,Route,Switch,Link,Redirect} from "react-router-dom";
+//pages
+import Index from "./pages/index";
+import NoteFoundPage from "./pages/404";
+import User from "./pages/user";
+import Pop from "./pages/popup";
+import Navigation from "./pages/navigation";
+import DataEntry from "./pages/dataentry";
+import ViewRecords from "./pages/viewrecords";
+import Test from "./pages/test";
+
 function App() {
+  const[age,setAge]=useState(<User/>);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Switch>
+        <Route exact path="/" >
+          <Index></Index>
+        </Route>
+        <Route exact path="/404" component={NoteFoundPage} />
+        <Route exact path="/user" component={User} />
+        <Route exact path="/popup" component={Pop} />
+        <Route exact path="/navigation" component={Navigation} />
+        <Route exact path="/dataentry" component={DataEntry} />
+        <Route exact path="/viewrecords" component={ViewRecords} />
+        <Route exact path="/test" component={Test} />
+        <Redirect to="404" />
+      </Switch>
+    </Router>
   );
 }
 
